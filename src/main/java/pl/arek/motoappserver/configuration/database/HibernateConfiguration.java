@@ -19,6 +19,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.transaction.interceptor.TransactionInterceptor;
 
 /**
  * Hibernate configuration here - nothing special
@@ -65,6 +66,17 @@ public class HibernateConfiguration {
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
         hibernateTransactionManager.setSessionFactory(this.getSessionFactory());
         return hibernateTransactionManager;
+    }
+
+    @Bean
+    @Profile("production_only")
+    public TransactionInterceptor transactionInterceptor() {
+        TransactionInterceptor interceptor = new TransactionInterceptor();
+        
+        interceptor.setTransactionManager(txManager());
+
+        
+        return interceptor;
     }
 
     @Bean(name = "dataSource")

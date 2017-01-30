@@ -76,7 +76,7 @@ public class User implements Serializable {
     private List<Role> roles;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
-    UserProfile userProfile;
+    private UserProfile userProfile;
 
     public UserProfile getUserProfile() {
         return userProfile;

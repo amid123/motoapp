@@ -5,9 +5,11 @@
  */
 package pl.arek.motoappserver.services.profile.impl;
 
+import org.hibernate.Hibernate;
 import pl.arek.motoappserver.domain.entities.UserProfile;
 import pl.arek.motoappserver.domain.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import pl.arek.motoappserver.services.profile.UserProfileService;
 
 /**
@@ -15,13 +17,13 @@ import pl.arek.motoappserver.services.profile.UserProfileService;
  * @author Arkadiusz Gibes <arkadiusz.gibes@yahoo.com>
  */
 public class UserProfileServiceImpl implements UserProfileService {
-    
+
     @Autowired
     UserProfileRepository profileRepository;
-    
+
     @Override
     public UserProfile getProfileByUserLogin(String login) {
-        
+
         UserProfile profile = this.profileRepository.getProfileByUserName(login);
 
         /**
@@ -29,9 +31,10 @@ public class UserProfileServiceImpl implements UserProfileService {
          * user profile because when gson try to process it will die :).
          */
         profile.getUser().setUserProfile(null);
+
         profile.getPersonalSettings().setProfile(null);
-        
+
         return profile;
     }
-    
+
 }

@@ -59,21 +59,17 @@ public class UserProfile implements Serializable {
     @JoinColumn(name = "settings_id")
     private PersonalSettings personalSettings;
 
-    private String firstName;
+    @OneToOne(optional = true, orphanRemoval = true)
+    @JoinColumn(name = "personal_details_id")
+    private PersonalDetails personalDetails;
+
+    //private String firstName;
     private byte[] photo;
     private HowFast howFast;
     private String bikeType;
     private String userCity;
     private String decrtiption;
     private int age;
-
-    public PersonalSettings getPersonalSettings() {
-        return personalSettings;
-    }
-
-    public void setPersonalSettings(PersonalSettings personalSettings) {
-        this.personalSettings = personalSettings;
-    }
 
     public long getId() {
         return id;
@@ -83,12 +79,28 @@ public class UserProfile implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public User getUser() {
+        return user;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public PersonalSettings getPersonalSettings() {
+        return personalSettings;
+    }
+
+    public void setPersonalSettings(PersonalSettings personalSettings) {
+        this.personalSettings = personalSettings;
+    }
+
+    public PersonalDetails getPersonalDetails() {
+        return personalDetails;
+    }
+
+    public void setPersonalDetails(PersonalDetails personalDetails) {
+        this.personalDetails = personalDetails;
     }
 
     public byte[] getPhoto() {
@@ -139,25 +151,16 @@ public class UserProfile implements Serializable {
         this.age = age;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 71 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 71 * hash + Objects.hashCode(this.firstName);
-        hash = 71 * hash + Arrays.hashCode(this.photo);
-        hash = 71 * hash + Objects.hashCode(this.howFast);
-        hash = 71 * hash + Objects.hashCode(this.bikeType);
-        hash = 71 * hash + Objects.hashCode(this.userCity);
-        hash = 71 * hash + Objects.hashCode(this.decrtiption);
-        hash = 71 * hash + this.age;
+        hash = 53 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 53 * hash + Arrays.hashCode(this.photo);
+        hash = 53 * hash + Objects.hashCode(this.howFast);
+        hash = 53 * hash + Objects.hashCode(this.bikeType);
+        hash = 53 * hash + Objects.hashCode(this.userCity);
+        hash = 53 * hash + Objects.hashCode(this.decrtiption);
+        hash = 53 * hash + this.age;
         return hash;
     }
 
@@ -179,9 +182,6 @@ public class UserProfile implements Serializable {
         if (this.age != other.age) {
             return false;
         }
-        if (!Objects.equals(this.firstName, other.firstName)) {
-            return false;
-        }
         if (!Objects.equals(this.bikeType, other.bikeType)) {
             return false;
         }
@@ -199,6 +199,5 @@ public class UserProfile implements Serializable {
         }
         return true;
     }
-    
-    
+
 }

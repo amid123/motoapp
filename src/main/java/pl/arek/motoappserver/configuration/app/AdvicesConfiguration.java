@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import pl.arek.motoappserver.advices.AdviceAccountCleaner;
-import pl.arek.motoappserver.advices.AdviceRepositories;
+import pl.arek.motoappserver.advices.StandardRepositoryAdvice;
 
 /**
  *
@@ -20,9 +20,8 @@ import pl.arek.motoappserver.advices.AdviceRepositories;
 public class AdvicesConfiguration {
 
     @Bean
-    AdviceRepositories adviceRepositories() {
-        return new AdviceRepositories();
-
+    StandardRepositoryAdvice adviceRepositories() {
+        return new StandardRepositoryAdvice();
     }
 
     @Bean
