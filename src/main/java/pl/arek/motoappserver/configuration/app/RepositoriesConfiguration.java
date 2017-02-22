@@ -8,6 +8,7 @@ package pl.arek.motoappserver.configuration.app;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import pl.arek.motoappserver.domain.repositories.PersonalSettingsRepository;
 import pl.arek.motoappserver.domain.repositories.UserProfileRepository;
 import pl.arek.motoappserver.domain.repositories.UserRepository;
@@ -19,7 +20,9 @@ import pl.arek.motoappserver.domain.repositories.impl.UserRepositoryImpl;
  *
  * @author Arkadiusz Gibes <arkadiusz.gibes@yahoo.com>
  */
+
 @Configuration
+@PropertySource("classpath:props/database.properties")
 public class RepositoriesConfiguration {
 
     /**

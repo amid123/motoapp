@@ -13,7 +13,6 @@ import pl.arek.motoappserver.rest.dtos.*;
  */
 public class MaxRadiusDto {
     
-    
      private double radius;
 
         public MaxRadiusDto() {
